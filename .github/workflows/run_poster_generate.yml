@@ -2,8 +2,8 @@ name: Run Poster Generate
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "0 0 * * *"
+  #schedule:
+   # - cron: "0 0 * * *"
 
 env:
   # please change to your own config.
