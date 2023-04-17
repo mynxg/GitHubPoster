@@ -111,7 +111,7 @@ jobs:
       - name: Run sync wakatime script
         if: contains(env.TYPE, 'wakatime')
         run: |
-          python3 -m github_poster wakatime --wakatime_key "${{ secrets.WAKATIME_KEY }}" --me ${{ env.ME }}
+          python3 -m github_poster wakatime --wakatime_key "${{ secrets.WAKATIME_KEY }}" --me ${{ env.ME }} --year 2019-2023
 
       - name: Run sync dota2 script
         if: contains(env.TYPE, 'dota2')
