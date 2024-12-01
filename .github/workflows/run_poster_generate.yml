@@ -9,8 +9,8 @@ env:
   # please change to your own config.
   # this actions generate only this year
   # If you fork this please change the type to yours below
-  TYPE: "strava, github, forest, pass" # support strava/gpx/ns/cichang/shanbay/duolingo/issue/leetcode/github/gitlab/kindle/bilibili/wakatime/dota2/forest, Please change the 'pass' it to your own separated by commas
-  ME: yihong0618
+  TYPE: "twitter, github, bbdc, bilibili,wakatime" # support strava/gpx/ns/cichang/shanbay/duolingo/issue/leetcode/github/gitlab/kindle/bilibili/wakatime/dota2/forest, Please change the 'pass' it to your own separated by commas
+  ME: mynxg
 
 jobs:
   sync:
@@ -49,7 +49,12 @@ jobs:
         if: contains(env.TYPE, 'duolingo')
         run: |
           python -m github_poster duolingo --duolingo_user_name ${{ secrets.DUOLINGO_USER_NAME }} --duolingo_jwt ${{ secrets.DUOLINGO_JWT }} --me ${{ env.ME }}
-
+      
+      - name: Run sync bbdc script
+        if: contains(env.TYPE, 'bbdc')
+        run: |
+          python3 -m github_poster bbdc --bbdc_user_id "${{ secrets.BBDC_USER_ID }}" --bbdc_type word --me ${{ env.ME }}
+          
       - name: Run sync cichang script
         if: contains(env.TYPE, 'cichang')
         run: |
@@ -109,6 +114,11 @@ jobs:
         if: contains(env.TYPE, 'openlanguage')
         run: |
           python3 -m github_poster openlanguage --openlanguage_user_name "${{ secrets.OPENLANGUAGE_USER_NAME }}" --openlanguage_password "${{ secrets.OPENLANGUAGE_PASSWORD }}" --me ${{ env.ME }}
+     
+      - name: Run sync twitter script
+        if: contains(env.TYPE, 'twitter')
+        run: |
+          python -m github_poster twitter --twitter_user_name ${{ secrets.TWITTER_USER_NAME }} --me ${{ env.ME }} --with-animation --with-skyline
 
       # change the types to yours
       - name: Run sync multiple script
